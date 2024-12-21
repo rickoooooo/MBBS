@@ -119,11 +119,11 @@ class GameTicTacToe():
     '''
     def format_board(self) -> str:
         board_string = ""
-        board_string += f"{self.board[0]}|{self.board[1]}|{self.board[2]}|\n"
+        board_string += f"{self.board[0]}|{self.board[1]}|{self.board[2]}\n"
         board_string += "--------\n"
-        board_string += f"{self.board[3]}|{self.board[4]}|{self.board[5]}|\n"
+        board_string += f"{self.board[3]}|{self.board[4]}|{self.board[5]}\n"
         board_string += "--------\n"
-        board_string += f"{self.board[6]}|{self.board[7]}|{self.board[8]}|\n"
+        board_string += f"{self.board[6]}|{self.board[7]}|{self.board[8]}\n"
 
         return board_string
 
