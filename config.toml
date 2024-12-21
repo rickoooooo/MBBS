@@ -1,0 +1,177 @@
+
+
+# This is a TOML document
+
+[config]
+activate_keyword = "bbs"
+#radio_ip = "192.168.70.105"
+radio_channel = 1
+guestbook_file = "data/guestbook.txt"
+log_level = "DEBUG"
+tcp_server_port = 5050
+tcp_server_ip = "127.0.0.1"
+serial_device = "/dev/ttyACM0"
+username_min_length = 5
+username_max_length = 30
+
+[database]
+filename = "user.db"
+
+[bbs]
+database = "bbs.db"
+
+[messages]
+border_top = "===================="
+border_bottom = "===================="
+
+[sessions]
+timeout = 300
+
+[[menus]]
+name ="Login"
+description = "[L]ogin"
+command = "l"
+
+    [[menus.options]]
+    type = "command"
+    module = "user_login"
+    class = "UserLogin"
+    command = "l"
+    description = "[L]ogin"
+
+    [[menus.options]]
+    type = "command"
+    module = "user_register"
+    class = "UserRegister"
+    command = "r"
+    description = "[R]egister"
+
+[[menus]]
+name ="Main Menu"
+description = "[M]ain menu"
+command = "m"
+
+    [[menus.options]]
+    type = "command"
+    module = "cmd_help"
+    class = "CmdHelp"
+    command = "h"
+    description = "[H]elp"
+
+    [[menus.options]]
+    type = "command"
+    module = "bbs_main"
+    class = "BBSMain"
+    command = "b"
+    description = "[B]BS"
+
+    [[menus.options]]
+    type = "menu"
+    module = "menu"
+    name = "Utilities"
+
+    [[menus.options]]
+    type = "menu"
+    module = "menu"
+    name = "Guestbook"
+
+    [[menus.options]]
+    type = "menu"
+    module = "menu"
+    name = "Games"
+
+    [[menus.options]]
+    type = "command"
+    module = "cmd_quit"
+    class = "CmdQuit"
+    command = "q"
+    description = "[Q]uit"
+
+[[menus]]
+name ="Utilities"
+description = "[U]tilities"
+command = "u"
+
+    [[menus.options]]
+    type = "command"
+    module = "cmd_echo"
+    class = "CmdEcho"
+    command = "e"
+    description = "[E]cho"
+
+    [[menus.options]]
+    type = "command"
+    module = "cmd_sysinfo"
+    class = "CmdSysinfo"
+    command = "s"
+    description = "[S]ysinfo"
+
+    [[menus.options]]
+    type = "command"
+    module = "cmd_shell"
+    class = "CmdShell"
+    command = "sh"
+    description = "[Sh]ell"
+    role = "admin"
+
+    [[menus.options]]
+    type = "command"
+    module = "cmd_back"
+    class = "CmdBack"
+    command = "b"
+    description = "[B]ack"
+
+[[menus]]
+name ="Games"
+description = "[G]ames"
+command = "g"
+
+    [[menus.options]]
+    type = "command"
+    module = "game_tictactoe"
+    class = "GameTicTacToe"
+    command = "t"
+    description = "[T]ic Tac Toe"
+    [[menus.options]]
+    type = "command"
+    module = "game_tictactoe_mp"
+    class = "GameTicTacToeMultiPlayer"
+    command = "m"
+    description = "[M]ultiplayer Tic Tac Toe"
+    [[menus.options]]
+    type = "command"
+    module = "cmd_back"
+    class = "CmdBack"
+    command = "b"
+    description = "[B]ack"
+
+[[menus]]
+name ="Guestbook"
+description = "Guestboo[k]"
+command = "k"
+
+    [[menus.options]]
+    type = "command"
+    module = "cmd_guestbook_read"
+    class = "CmdGuestbookRead"
+    command = "r"
+    description = "[R]ead"
+    [[menus.options]]
+    type = "command"
+    module = "cmd_guestbook_sign"
+    class = "CmdGuestbookSign"
+    command = "s"
+    description = "[S]ign"
+    [[menus.options]]
+    type = "command"
+    module = "cmd_back"
+    class = "CmdBack"
+    command = "b"
+    description = "[B]ack"
+
+[contexts]
+    [contexts.quit]
+    msg_goodbye = "Thanks for visiting! Goodbye!"
+
+    [contexts.tictactoemp]
+    database = "data/tictactoemp.db"
