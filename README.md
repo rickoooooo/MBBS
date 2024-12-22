@@ -1,6 +1,12 @@
 # MBBS
 MBBS is a simple BBS system for use with Meshtastic. It is designed to be modular and easy to modify or extend without having to modify existing code. Users interact with the BBS using the Meshtastic chat system. Optionally, users can interact via TCP.
 
+# Screenshots
+![Screenshot of Android app with the default BBS main menu](images/MBBS-Screenshot1.png?raw=true "Default main menu")
+![Screenshot of Android app with the list of topics displayed from the BBS context](images/MBBS-Screenshot-BBSTopics.png?raw=true "BBS topic examples")
+![Screenshot of Android app with an example post displayed from the BBS context](images/MBBS-Screenshot-BBSPost.png?raw=true "BBS post example")
+![Screenshot of Android app with the default Tic Tac Toe example game](images/MBBS-Screenshot-TicTacToe.png?raw=true "Tic Tac Toe example game")
+
 # Status
 This project is very much incomplete. It has not been extensively tested and certainly contains strange bugs. Contributions and bug reports are welcome.
 
