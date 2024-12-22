@@ -8,7 +8,7 @@ Used to interface with SQLite database for tracking users and roles, authenticat
 
 class UserDB():
     def __init__(self):
-        self.db_file = f"data/{config["database"]["filename"]}"
+        self.db_file = f"data/{config["auth"]["database"]}"
         self.con = sqlite3.connect(self.db_file)
         self.cursor = self.con.cursor()
         self.initialize_database()

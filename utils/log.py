@@ -4,7 +4,7 @@ from utils.config import config
 # Global var which can be imported and used to write formatted log messages
 logger = logging.getLogger(__name__)
 
-log_level = config["config"]["log_level"]
+log_level = config["main"]["log_level"]
 
 match log_level:
     case "NOTSET":

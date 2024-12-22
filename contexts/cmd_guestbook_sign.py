@@ -10,7 +10,7 @@ class CmdGuestbookSign(Context):
     def __init__(self, session: "UserSession", command: str, description: str):
         super().__init__(session, command, description)
         self.message.header = "Guestbook - Sign"
-        self.guestbook_file = config["config"]["guestbook_file"]
+        self.guestbook_file = config["guestbook"]["guestbook_file"]
 
     '''
     Invoked when this Context starts. Send welcome message.

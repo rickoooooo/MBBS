@@ -11,7 +11,7 @@ STATE_READING = 1
 class CmdGuestbookRead(Context):
     def __init__(self, session: "UserSession", command: str, description: str):
         super().__init__(session, command, description)
-        self.guestbook_file = config["config"]["guestbook_file"]
+        self.guestbook_file = config["guestbook"]["guestbook_file"]
         self.message.header = "Guestbook - Read"
         self.state = STATE_BEGIN
 
@@ -29,6 +29,7 @@ class CmdGuestbookRead(Context):
                 self.send_error("Error: Unable to read guestbook file: " + str(e))
             else:
                 self.message.body = text
+                self.message.footer = "[q] to quit"
                 self.session.send_message(self.message)
         
         elif self.state == STATE_READING:

@@ -2,20 +2,25 @@
 
 # This is a TOML document
 
-[config]
+[main]
 activate_keyword = "bbs"
-radio_ip = "192.168.70.105"
 radio_channel = 1
-guestbook_file = "data/guestbook.txt"
 log_level = "DEBUG"
+
+[interface_mesh_tcp]
+radio_ip = "192.168.70.105"
+
+[interface_mesh_serial]
+#serial_device = "/dev/ttyACM0"
+
+[interface_tcp_server]
 tcp_server_port = 5050
 tcp_server_ip = "127.0.0.1"
-#serial_device = "/dev/ttyACM0"
+
+[auth]
+database = "user.db"
 username_min_length = 5
 username_max_length = 30
-
-[database]
-filename = "user.db"
 
 [bbs]
 database = "bbs.db"
@@ -26,6 +31,9 @@ border_bottom = "===================="
 
 [sessions]
 timeout = 300
+
+[guestbook]
+guestbook_file = "data/guestbook.txt"
 
 [[menus]]
 name ="Login"

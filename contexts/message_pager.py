@@ -69,7 +69,7 @@ class MessagePager(Context):
     User wants to see the next page
     '''
     def next_page(self) -> None:
-        if self.current_page <= self.total_pages:
+        if self.current_page < self.total_pages - 1:
             self.current_page += 1
             page_text = self.messages[self.current_page]
             self.message.body = self.get_current_page()
@@ -79,6 +79,9 @@ class MessagePager(Context):
                 #self.session.revert_context()
             else:
                 self.session.send_message(self.message)
+        else:
+            self.send_error("No more pages.")
+            return
     '''
     Invoked whenever a packet comes into this context. Handles user input.
     '''
@@ -111,12 +114,10 @@ class MessagePager(Context):
                         return
                     return
                 else:
-                    self.message.body = "Error: Invalid page number."
-                    self.session.send_message(self.message)
+                    self.send_error("Error: Invalid page number.")
                     return
             
             # User entered something that isn't a valid command
             else:
-                self.message.body = "Invalid option!"
-                self.session.send_message(self.message)
+                self.send_error("Invalid option!")
         return

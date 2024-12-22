@@ -51,8 +51,8 @@ class UserRegister(Context):
                 self.send_error("Invalid characters in username! Use [a-z,A-Z,0-9,-,_,.]")
                 return
 
-            username_min_length = config["config"]["username_min_length"]
-            username_max_length = config["config"]["username_max_length"]
+            username_min_length = config["auth"]["username_min_length"]
+            username_max_length = config["auth"]["username_max_length"]
             if len(text) < username_min_length or len(text) > 30:
                 self.send_error(f"Username must be between {username_min_length} and {username_max_length} characters long.")
                 return

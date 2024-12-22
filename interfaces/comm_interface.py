@@ -10,7 +10,7 @@ and testing new features. Other interfaces can be build in this 'interfaces' sub
 instantiate the new interface.
 '''
 
-ACTIVATE_KEYWORD = config["config"]["activate_keyword"]
+ACTIVATE_KEYWORD = config["main"]["activate_keyword"]
 AUTHORIZED_PORTNUMS = [
     "TEXT_MESSAGE_APP",                 # Meshtastic chat app
     "COMM_INTERFACE_MESHTASTIC_TCP"     # Custom PORTNUM created in the CommInterfaceTCP object.
@@ -42,11 +42,13 @@ class CommInterface:
                 if session_db.check_session(user_id):
                     logger.info("User has session")
 
-                    # Ensure the incoming packet is addressed to us. If not, just return
-                    bbs_node_id = interface.getMyNodeInfo()["num"]
-                    if packet["to"] != bbs_node_id:
-                        return
-                        
+                    # If the interface is None, it's because the connection is not from the Mesh but from TCP or something else
+                    if interface != None:
+                        # Ensure the incoming packet is addressed to us. If not, just return
+                        bbs_node_id = interface.getMyNodeInfo()["num"]
+                        if packet["to"] != bbs_node_id:
+                            return
+
                     if "text" in packet["decoded"]:
                         session = session_db.get_session(user_id)
                         if session:

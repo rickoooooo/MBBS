@@ -82,7 +82,7 @@ def tcp_server_start(addr: set) -> None:
     server.bind(addr)
 
     server.listen()
-    logger.info(f"[LISTENING] TCP server is listening on {config['config']['tcp_server_ip']}:{config['config']['tcp_server_port']}")
+    logger.info(f"[LISTENING] TCP server is listening on {config['interface_tcp_server']['tcp_server_ip']}:{config['interface_tcp_server']['tcp_server_port']}")
     
     while True:
         conn, addr = server.accept()
@@ -93,7 +93,7 @@ def tcp_server_start(addr: set) -> None:
 
 # Get TCP server settings from config.toml.
 try:
-    addr = (config["config"]["tcp_server_ip"], config["config"]["tcp_server_port"])
+    addr = (config["interface_tcp_server"]["tcp_server_ip"], config["interface_tcp_server"]["tcp_server_port"])
 except:
     addr = ("", "")
     logger.error("Unable to read TCP server settings from config.toml. Continuing without it.")
