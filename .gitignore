@@ -4,3 +4,4 @@ utils/__pycache__/*
 interfaces/__pycache__/*
 data/*
 meshbbs/*
+config.toml
