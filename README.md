@@ -10,7 +10,7 @@ This project was inspired in part by the following projects:
 - https://github.com/joshbressers/meshbbs
 
 # Quickstart
-Modify `config.toml` to suit your needs and configuration. If you want to modify the menu structure, you can add, remove or reorganize menu items from `config.toml` without having to edit any BBS code. You can also create new menus in the config file using existing `Context` objects.
+Copy `config.toml.example` to `config.toml` and then modify it to suit your needs and configuration. If you want to modify the menu structure, you can add, remove or reorganize menu items from `config.toml` without having to edit any BBS code. You can also create new menus in the config file using existing `Context` objects.
 
 If you'd like to add a new function, you can write your own `Context` module. Refer to `context.py` to see how the base class is written. Then refer to other example modules such as `cmd_echo.py`, `cmd_sysinfo.py`, and `bbs_main.py` as a reference. Finally, modify `config.toml` to load your module into whatever menu you like.
 
