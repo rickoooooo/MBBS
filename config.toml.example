@@ -1,7 +1,3 @@
-
-
-# This is a TOML document
-
 [main]
 activate_keyword = "bbs"
 radio_channel = 1
