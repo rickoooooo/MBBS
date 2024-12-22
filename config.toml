@@ -4,13 +4,13 @@
 
 [config]
 activate_keyword = "bbs"
-#radio_ip = "192.168.70.105"
+radio_ip = "192.168.70.105"
 radio_channel = 1
 guestbook_file = "data/guestbook.txt"
 log_level = "DEBUG"
 tcp_server_port = 5050
 tcp_server_ip = "127.0.0.1"
-serial_device = "/dev/ttyACM0"
+#serial_device = "/dev/ttyACM0"
 username_min_length = 5
 username_max_length = 30
 

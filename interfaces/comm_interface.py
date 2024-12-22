@@ -40,7 +40,13 @@ class CommInterface:
 
                 # Does user have a session currently?
                 if session_db.check_session(user_id):
-                    logger.debug("User has session")
+                    logger.info("User has session")
+
+                    # Ensure the incoming packet is addressed to us. If not, just return
+                    bbs_node_id = interface.getMyNodeInfo()["num"]
+                    if packet["to"] != bbs_node_id:
+                        return
+                        
                     if "text" in packet["decoded"]:
                         session = session_db.get_session(user_id)
                         if session:
