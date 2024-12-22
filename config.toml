@@ -114,13 +114,13 @@ command = "u"
     command = "s"
     description = "[S]ysinfo"
 
-    [[menus.options]]
-    type = "command"
-    module = "cmd_shell"
-    class = "CmdShell"
-    command = "sh"
-    description = "[Sh]ell"
-    role = "admin"
+#    [[menus.options]]
+#    type = "command"
+#    module = "cmd_shell"
+#    class = "CmdShell"
+#    command = "sh"
+#    description = "[Sh]ell"
+#    role = "admin"
 
     [[menus.options]]
     type = "command"
