@@ -14,7 +14,7 @@ class CommInterfaceMeshtasticTCP(CommInterface):
     def __init__(self, radio_ip: str, channel_index: int) -> None:
         self.radio_ip = radio_ip
         self.channel_index = channel_index
-        self.interface = meshtastic.tcp_interface.TCPInterface(self.radio_ip)
+        self.interface = meshtastic.tcp_interface.TCPInterface(self.radio_ip, connectNow=True)
 
         self.monitor_thread = threading.Thread(target=self.check_socket_closed)
         self.monitor_thread.start()
@@ -22,6 +22,7 @@ class CommInterfaceMeshtasticTCP(CommInterface):
         # Meshtastic uses pubsub to receive messages from the radios asynchronously
         pub.subscribe(self.on_receive, "meshtastic.receive")
         pub.subscribe(self.on_connection, "meshtastic.connection.established")
+        pub.subscribe(self.on_disconnect, "meshtastic.connection.lost")
 
     '''
     Called when we (re)connect to the radio
@@ -30,6 +31,12 @@ class CommInterfaceMeshtasticTCP(CommInterface):
         # defaults to broadcast, specify a destination ID if you wish
         logger.info("Connected to radio.")
         #interface.sendText("BBS Online!")
+
+    '''
+    Called when we lose connection to the radio
+    '''
+    def on_disconnect(self, interface: CommInterface) -> None:
+        self.interface_reset()
 
     '''
     Send text message over TCP port to the Meshtastic radip
@@ -52,7 +59,7 @@ class CommInterfaceMeshtasticTCP(CommInterface):
     '''
     Hack to test if the TCP socket is still open
     Meshtastic radio only allows one connection at a time. If anything else touches the port, it will disconnect the BBS.
-    The Meshtastic API doesn't currently have a way to monitor and handle this condition, so we test here and reset as needed.
+    The Meshtastic API connection.lost topic doesn't seem to get triggered right away and we won't see incomming packets until the connection is reset
     '''
     def check_socket_closed(self) -> bool:
         while True:
@@ -61,11 +68,11 @@ class CommInterfaceMeshtasticTCP(CommInterface):
                 # this will try to read bytes without blocking and also without removing them from buffer (peek only)
                 data = sock.recv(16, socket.MSG_DONTWAIT | socket.MSG_PEEK)
                 if len(data) == 0:
-                    self.socket_reset()
+                    self.interface_reset()
             except BlockingIOError:
                 pass  # socket is open and reading from it would block
             except ConnectionResetError:
-                self.socket_reset()  # socket was closed for some other reason
+                self.interface_reset()  # socket was closed for some other reason
             except Exception as e:
                 logger.error(str(e))
                 pass
@@ -74,7 +81,7 @@ class CommInterfaceMeshtasticTCP(CommInterface):
     '''
     Resets the TCP interface if it was disconnected for some reason
     '''
-    def socket_reset(self) -> None:
+    def interface_reset(self) -> None:
         self.interface.close()
-        self.interface = meshtastic.tcp_interface.TCPInterface(self.radio_ip)
+        self.interface = meshtastic.tcp_interface.TCPInterface(self.radio_ip, connectNow=True)
 
