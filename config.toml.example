@@ -1,6 +1,6 @@
 [main]
 activate_keyword = "bbs"
-radio_channel = 1
+radio_channel_index = 1
 log_level = "DEBUG"
 
 [interface_mesh_tcp]

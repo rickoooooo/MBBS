@@ -8,7 +8,7 @@ MBBS is a simple BBS system for use with Meshtastic. It is designed to be modula
 ![Screenshot of Android app with the default Tic Tac Toe example game](images/MBBS-Screenshot-TicTacToe.png?raw=true "Tic Tac Toe example game")
 
 # Status
-This project is very much incomplete. It has not been extensively tested and certainly contains strange bugs. Contributions and bug reports are welcome.
+This project is very much incomplete. It has not been extensively tested and probbably contains strange bugs. Contributions, bug reports, and feature requests are welcome.
 
 # Inspiration
 This project was inspired in part by the following projects:

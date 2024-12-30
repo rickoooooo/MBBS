@@ -11,9 +11,9 @@ This interface allows the BBS to communicate over a Meshtastic radio device by u
 '''
 
 class CommInterfaceMeshtasticTCP(CommInterface):
-    def __init__(self, radio_ip: str, channel_index: int) -> None:
+    def __init__(self, radio_ip: str, bc_channel_index: int) -> None:
         self.radio_ip = radio_ip
-        self.channel_index = channel_index
+        self.bc_channel_index = bc_channel_index
         self.interface = meshtastic.tcp_interface.TCPInterface(self.radio_ip, connectNow=True)
 
         self.monitor_thread = threading.Thread(target=self.check_socket_closed)
@@ -30,7 +30,7 @@ class CommInterfaceMeshtasticTCP(CommInterface):
     def on_connection(self, interface: CommInterface, topic=pub.AUTO_TOPIC) -> None: 
         # defaults to broadcast, specify a destination ID if you wish
         logger.info("Connected to radio.")
-        #interface.sendText("BBS Online!")
+        self.send_broadcast("BBS Online!")
 
     '''
     Called when we lose connection to the radio
@@ -45,9 +45,17 @@ class CommInterfaceMeshtasticTCP(CommInterface):
         self.interface.sendText(
             text,
             user_id,
-            wantAck=True,
-            channelIndex=self.channel_index
-            #onResponse=self.menu.option_handler(packet, self.interface)
+            wantAck=True
+        )
+
+    '''
+    Send broadcast message on configured channel index
+    '''
+    def send_broadcast(self, text:str) -> None:
+        self.interface.sendText(
+            text,
+            channelIndex=self.bc_channel_index,
+            wantAck=True
         )
 
     '''

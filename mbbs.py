@@ -19,7 +19,7 @@ if __name__ == '__main__':
     # Meshtastic radio TCP interface
     try:
         radio_ip = config["interface_mesh_tcp"]["radio_ip"]
-        radio_channel = config["main"]["radio_channel"]
+        radio_channel = config["main"]["radio_channel_index"]
     except: 
         logger.error("Unable to read radio's TCP config options from config.toml. Continuing without it.")
     else:
@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # Meshtastic radio serial interface
     try:
         radio_device = config["interface_mesh_serial"]["serial_device"]
-        radio_channel = config["main"]["radio_channel"]
+        radio_channel = config["main"]["radio_channel_index"]
     except:
         logger.error("Unable to read serial device path from config.toml. Continuing without it.")
     else:
