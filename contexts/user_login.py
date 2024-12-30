@@ -3,6 +3,7 @@ from contexts.context import Context
 from contexts.menu import Menu
 from utils.user_db import UserDB
 from utils.config import config
+from utils.log import logger
 
 '''
 Authenticates a user to the BBS. When a user successfully authenticates, the context will switch to whatever the second menu object is in config.toml.
@@ -53,6 +54,7 @@ class UserLogin(Context):
         elif self.state == STATE_PASSWORD:
             # Try to authenticate
             if self.user_db.user_authenticate(self.username, text):
+                logger.info(f"User {self.username} logged in.")
                 self.message.body = "Login successful!"
                 self.session.send_message(self.message)
                 self.session.set_authenticated(self.username)
@@ -64,6 +66,7 @@ class UserLogin(Context):
 
             # User failed to authenticate
             else:
+                logger.info(f"User {self.username} failed to log in.")
                 self.message.body = "Login failure!"
                 self.session.send_message(self.message)
                 self.session.revert_context()

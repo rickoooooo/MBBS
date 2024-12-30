@@ -40,7 +40,7 @@ class CommInterface:
 
                 # Does user have a session currently?
                 if session_db.check_session(user_id):
-                    logger.info("User has session")
+                    logger.debug("User has session")
 
                     # If the interface is None, it's because the connection is not from the Mesh but from TCP or something else
                     if interface != None:
