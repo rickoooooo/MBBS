@@ -16,7 +16,9 @@ This project was inspired in part by the following projects:
 - https://github.com/joshbressers/meshbbs
 
 # Quickstart
-Copy `config.toml.example` to `config.toml` and then modify it to suit your needs and configuration. If you want to modify the menu structure, you can add, remove or reorganize menu items from `config.toml` without having to edit any BBS code. You can also create new menus in the config file using existing `Context` objects.
+Copy `config.toml.example` to `config.toml` and then modify it to suit your needs and configuration. Modify the `radio_channel_index` value to the channel index of your broadcast channel. If the BBS sends a broadcast message, the message will be sent on the channel correspodning to this channel index. For example, if `radio_channel_index` is set to `0`, and you have a channel named `BBS` in channel slot 0, then broadcast messages will be sent on the `BBS` channel.
+
+If you want to modify the menu structure, you can add, remove or reorganize menu items from `config.toml` without having to edit any BBS code. You can also create new menus in the config file using existing `Context` objects.
 
 If you'd like to add a new function, you can write your own `Context` module. Refer to `context.py` to see how the base class is written. Then refer to other example modules such as `cmd_echo.py`, `cmd_sysinfo.py`, and `bbs_main.py` as a reference. Finally, modify `config.toml` to load your module into whatever menu you like.
 
